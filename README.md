@@ -1,6 +1,6 @@
 # team02-m23-9am-1
 
-```
+
 | Table                       | Team Member  | Github Id     |
 |-----------------------------|--------------|---------------|
 | `UCSBDiningCommonsMenuItem` | Alec         | alecmorrison  |
@@ -9,7 +9,7 @@
 | `MenuItemReview`            | Pablo        | pabucsb       |
 | `HelpRequest`               | (unassigned) |               |
 | `Articles`                  | (unassigned) |               |
-```
+
 
 Instructions: <https://ucsb-cs156.github.io/m23/lab/team02.html>
 

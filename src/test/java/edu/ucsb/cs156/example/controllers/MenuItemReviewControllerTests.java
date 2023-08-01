@@ -177,21 +177,21 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
         public void an_admin_user_can_post_a_new_menuitemreview() throws Exception {
                 // arrange
 
-                LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
+                //LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
 
                 MenuItemReview menuItemReview1 = MenuItemReview.builder()
-                                .itemId(123L)
-                                .reviewerEmail("alecmorrison@ucsb.edu")
-                                .stars(2)
-                                .dateReviewed(ldt1)
-                                .comments("never coming back here")
+                                .itemId(2L)
+                                .reviewerEmail("pds@ucsb.edu")
+                                .stars(5)
+                                .dateReviewed(LocalDateTime.of(2021, 5, 1, 12, 0, 0))
+                                .comments("solid food")
                                 .build();
 
                 when(menuItemReviewRepository.save(eq(menuItemReview1))).thenReturn(menuItemReview1);
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                post("/api/menuitemreview/post?reviewerEmail=pds@ucsb.edu&stars=5&dateReviewed=2022-01-03T00:00:00&comments=good meal")
+                                post("/api/menuitemreview/post?itemId=2&reviewerEmail=pds@ucsb.edu&stars=5&dateReviewed=2021-05-01T12:00:00&comments=solid food")
                                                 .with(csrf()))
                                 .andExpect(status().isOk()).andReturn();
 
@@ -209,41 +209,40 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
 
                 LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
 
-                MenuItemReview menuItemReview1 = MenuItemReview.builder()
-                                .itemId(123L)
+                MenuItemReview menuItemReview = MenuItemReview.builder()
+                                //.itemId(1L)
                                 .reviewerEmail("adhit@ucsh.edu")
                                 .stars(5)
                                 .dateReviewed(ldt1)
                                 .comments("amazing food and service")
                                 .build();
 
-                when(menuItemReviewRepository.findById(eq(123L))).thenReturn(Optional.of(menuItemReview1));
+                when(menuItemReviewRepository.findById(eq(15L))).thenReturn(Optional.of(menuItemReview));
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                delete("/api/menuitemreview?id=123")
+                                delete("/api/menuitemreview?id=15")
                                                 .with(csrf()))
                                 .andExpect(status().isOk()).andReturn();
 
                 // assert
-                verify(menuItemReviewRepository, times(1)).findById(123L);
+                verify(menuItemReviewRepository, times(1)).findById(15L);
                 verify(menuItemReviewRepository, times(1)).delete(any());
 
                 Map<String, Object> json = responseToJson(response);
-                assertEquals("MenuItemReview with id 123 deleted", json.get("message"));
+                assertEquals("MenuItemReivew with id 15 deleted", json.get("message"));
         }
 
         @WithMockUser(roles = { "ADMIN", "USER" })
         @Test
-        public void admin_tries_to_delete_non_existant_menuitemreview_and_gets_right_error_message()
-                        throws Exception {
+        public void admin_tries_to_delete_non_existant_menuitemreview_and_gets_right_error_message() throws Exception {
                 // arrange
 
                 when(menuItemReviewRepository.findById(eq(15L))).thenReturn(Optional.empty());
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                delete("/api/menuItemReview?id=15")
+                                delete("/api/menuitemreview?id=15")
                                                 .with(csrf()))
                                 .andExpect(status().isNotFound()).andReturn();
 

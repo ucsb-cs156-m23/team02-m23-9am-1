@@ -140,7 +140,7 @@ public class RecommendationRequestControllerTests extends ControllerTestCase {
                 LocalDateTime needed1 = LocalDateTime.parse("2022-01-05T00:00:00");
 
                 RecommendationRequest recReq1 = RecommendationRequest.builder()
-                                .requesterEmail("adhit@ucsb.edu")
+                                .requesterEmail("adhit1@ucsb.edu")
                                 .professorEmail("phtcon@ucsb.edu")
                                 .explanation("Recommendations are cool 1")
                                 .dateRequested(requested1)
@@ -157,7 +157,7 @@ public class RecommendationRequestControllerTests extends ControllerTestCase {
                                 .explanation("Recommendations are cool 2")
                                 .dateRequested(requested2)
                                 .dateNeeded(needed2)
-                                .done(false)
+                                .done(true)
                                 .build();
 
                 ArrayList<RecommendationRequest> expectedRecReqs = new ArrayList<>();
@@ -181,23 +181,23 @@ public class RecommendationRequestControllerTests extends ControllerTestCase {
         @Test
         public void an_admin_user_can_post_a_new_recommendationrequest() throws Exception {
                 // arrange
-                LocalDateTime requested = LocalDateTime.parse("2022-01-03T00:00:00");
-                LocalDateTime needed = LocalDateTime.parse("2022-01-05T00:00:00");
+                LocalDateTime requested = LocalDateTime.parse("2022-01-01T00:00:00");
+                LocalDateTime needed = LocalDateTime.parse("2022-01-15T00:00:00");
 
                 RecommendationRequest recReq = RecommendationRequest.builder()
-                                .requesterEmail("adhit@ucsb.edu")
-                                .professorEmail("phtcon@ucsb.edu")
-                                .explanation("Recommendationsarecool")
+                                .requesterEmail("adhit2@ucsb.edu")
+                                .professorEmail("phtcon2@ucsb.edu")
+                                .explanation("recommendationsarecool7")
                                 .dateRequested(requested)
                                 .dateNeeded(needed)
-                                .done(false)
+                                .done(true)
                                 .build();
 
                 when(recReqRepository.save(eq(recReq))).thenReturn(recReq);
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                post("/api/recommendationrequest/post?requesterEmail=adhit@ucsb.edu&professorEmail=phtcon@ucsb.edu&explanation=Recommendationsarecool&dateRequested=2022-01-03T00:00:00&dateNeeded=2022-01-05T00:00:00&done=false")
+                                post("/api/recommendationrequest/post?requesterEmail=adhit2@ucsb.edu&professorEmail=phtcon2@ucsb.edu&explanation=recommendationsarecool7&dateRequested=2022-01-01T00:00:00&dateNeeded=2022-01-15T00:00:00&done=true")
                                                 .with(csrf()))
                                 .andExpect(status().isOk()).andReturn();
 
@@ -269,7 +269,7 @@ public class RecommendationRequestControllerTests extends ControllerTestCase {
                 LocalDateTime needed1 = LocalDateTime.parse("2022-01-05T00:00:00");
 
                 RecommendationRequest recReq1 = RecommendationRequest.builder()
-                                .requesterEmail("adhit@ucsb.edu")
+                                .requesterEmail("adhit1@ucsb.edu")
                                 .professorEmail("phtcon@ucsb.edu")
                                 .explanation("Recommendations are cool 1")
                                 .dateRequested(requested1)
@@ -281,12 +281,12 @@ public class RecommendationRequestControllerTests extends ControllerTestCase {
                 LocalDateTime needed2 = LocalDateTime.parse("2022-03-15T00:00:00");
 
                 RecommendationRequest recReq2 = RecommendationRequest.builder()
-                                .requesterEmail("adhit@ucsb.edu")
+                                .requesterEmail("adhit2@ucsb.edu")
                                 .professorEmail("pabs@ucsb.edu")
                                 .explanation("Recommendations are cool 2")
                                 .dateRequested(requested2)
                                 .dateNeeded(needed2)
-                                .done(false)
+                                .done(true)
                                 .build();
 
                 String requestBody = mapper.writeValueAsString(recReq2);

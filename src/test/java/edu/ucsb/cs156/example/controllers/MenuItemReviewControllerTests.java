@@ -257,14 +257,14 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
         public void admin_can_edit_an_existing_review() throws Exception {
                 // arrange
 
-                LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
-                LocalDateTime ldt2 = LocalDateTime.parse("2023-01-03T00:00:00");
+                //LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
+                //LocalDateTime ldt2 = LocalDateTime.parse("2023-01-03T00:00:00");
 
                 MenuItemReview menuItemReviewOrig = MenuItemReview.builder()
                                 .itemId(123L)
                                 .reviewerEmail("adhit@ucsh.edu")
                                 .stars(5)
-                                .dateReviewed(ldt1)
+                                .dateReviewed(LocalDateTime.of(2021, 6, 1, 12, 0, 0))
                                 .comments("amazing food and service")
                                 .build();
 
@@ -272,7 +272,7 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
                                 .itemId(124L)
                                 .reviewerEmail("pds@ucsh.edu")
                                 .stars(2)
-                                .dateReviewed(ldt1)
+                                .dateReviewed(LocalDateTime.of(2021, 6, 2, 12, 0, 0))
                                 .comments("never come here")
                                 .build();
 

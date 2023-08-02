@@ -257,10 +257,10 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
                 // LocalDateTime ldt2 = LocalDateTime.parse("2023-01-03T00:00:00");
 
                 UCSBOrganization ucsbOrg1 = UCSBOrganization.builder()
-                                .orgCode("ZPR")
+                                .orgCode("ZPL")
                                 .orgTranslationShort("ZRho")
-                                .orgTranslation("ZetaPhiRho")
-                                .inactive(false)
+                                .orgTranslation("ZetaPhiRo")
+                                .inactive(true)
                                 .build();
 
                 UCSBOrganization ucsbOrg2 = UCSBOrganization.builder()
